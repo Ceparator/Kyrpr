@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Add report</title>
+    </h:head>
+    <h:body>
+        <f:view> 
+            <h:form> 
+                <h2> 
+                    <h:outputLabel value="Add new report"/> 
+                </h2> 
+                <table> 
+                    <tr> 
+                        <th align="left"> 
+                            <h:outputLabel value="Report's route" for="route"/> 
+                        </th> 
+                        <th> 
+                            <h:inputText id="route" value="#{addReportBean.report.routeNumber}" required="true"> 
+                            </h:inputText> 
+                        </th> 
+                        <th> 
+                            <h:message for="route" style="color:red" /> 
+                        </th> 
+                    </tr> 
+                    <tr> 
+                        <th align="left"> 
+                            <h:outputLabel value="Route's tickets" for="tickets"/> 
+                        </th> 
+                        <th> 
+                            <h:inputText id="tickets" value="#{addReportBean.report.tickets}" required="true"> 
+                                <f:validateDoubleRange maximum="10000" minimum="1"/>
+                            </h:inputText> 
+                        </th> 
+                        <th> 
+                            <h:message for="tickets" style="color:red" /> 
+                        </th> 
+                    </tr> 
+                    <tr> 
+                        <th align="left"> 
+                            <h:outputLabel value="Report's vremya" for="vremya"/> 
+                        </th> 
+                        <th> 
+                            <h:inputText id="vremya" value="#{addReportBean.report.vremya}" required="true"> 
+                                <f:validateDoubleRange maximum="1000" minimum="-1000"/>
+                            </h:inputText> 
+                        </th> 
+                        <th> 
+                            <h:message for="vremya" style="color:red" /> 
+                        </th> 
+                    </tr>  
+                    <tr> 
+                        <th></th> 
+                        <th align="right"> 
+                            <h:commandButton  value="Add report" action="#{addStopBean.addNewReport()}"/> 
+                        </th> 
+                    </tr> 
+                </table>
+            </h:form> 
+        </f:view>
+    </h:body>
+</html>
+
+

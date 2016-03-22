@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ace="http://www.icefaces.org/icefaces/components">
+    <h:head>
+        <title>All reports</title>
+    </h:head>
+    <h:body>
+        <f:view> 
+            <tr> 
+            </tr> 
+            <h:form> 
+                <h2> 
+                    <h:outputLabel value="Reports"/> 
+                </h2> 
+                <ace:dataTable value="#{reportBean.getAllReports()}"
+                               var="rep">
+                            <!--   stateMap="#{reportBean.stateMap}"  
+                               selectionMode="multiple">-->
+                    <ace:column headerText="Id" sortBy="#{rep.idReport} "
+                                rendered ="true" filterBy="#{rep.idReport}" filterMatchMode="contains">
+                        <h:outputText value="#{rep.idReport}"/>
+                    </ace:column>
+                    <ace:column headerText="Route" sortBy="#{rep.routeNumber}"
+                                filterBy="#{rep.routeNumber}" filterMatchMode="contains">
+                        <h:outputText value="#{rep.routeNumber}"/>
+                    </ace:column>
+                    <ace:column headerText="Tickets number" sortBy="#{rep.tickets}"
+                                filterBy="#{rep.tickets}" filterMatchMode="contains">
+                        <h:outputText value="#{rep.tickets}"/>
+                    </ace:column>
+                    <ace:column headerText="Vremya" sortBy="#{rep.vremya}"
+                                filterBy="#{rep.vremya}" filterMatchMode="contains">
+                        <h:outputText value="#{rep.vremya}"/>
+                    </ace:column>
+                    <ace:column headerText="Sum" sortBy="#{rep.sum}"
+                                filterBy="#{rep.sum}" filterMatchMode="contains">
+                        <h:outputText value="#{rep.sum}"/>
+                    </ace:column>
+                    <ace:column headerText="" rendered="#{request.isUserInRole('admin')}">
+                        <h:commandLink action="#{reportBean.editReport(rep.idReport)}" value="Редатировать отчет"/>
+                    </ace:column>
+                </ace:dataTable>
+                <br/><br/>
+                <h:commandButton value="Look at the routes" action="/allRoutes.xhtml"/>
+                <br/><br/>
+                <h:commandButton value="Delete reports" rendered="#{request.isUserInRole('admin')}" actionListener="#{reportBean.actionListener}"/>
+                <br/><br/>
+                <h:commandButton value="Add report"  action="/addReport.xhtml"/>
+            </h:form> 
+        </f:view> 
+    </h:body>
+</html>
+
+

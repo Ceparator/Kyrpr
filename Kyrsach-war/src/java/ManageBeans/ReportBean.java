@@ -7,7 +7,7 @@ package ManageBeans;
 
 import DAO.ReportDAO;
 import Model.Report;
-import java.awt.event.ActionEvent;
+import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;

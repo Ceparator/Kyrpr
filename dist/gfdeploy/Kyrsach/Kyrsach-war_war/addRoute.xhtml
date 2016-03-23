@@ -24,7 +24,7 @@
                 </p> 
                 <p align="center"> 
                     <h:outputLabel value="The ticket price of the new route    " for="price"/>
-                    <h:inputText id="price" value="#{addRouteBean.price}" required="true"> 
+                    <h:inputText id="price" value="#{addRouteBean.ticketprice}" required="true"> 
                         <f:validateLongRange maximum="1000" minimum="1"/>
                     </h:inputText> 
                     <h:message for="price" style="color:red" />    
@@ -33,8 +33,8 @@
                     <tr>
                         <td>
                             <ace:dataTable value="#{stopBean.getFirstStops()}"
-                                           var="st">
-                                          <!-- stateMap="#{stopBean.stateMap}"!-->
+                                           var="st"
+                                           stateMap="#{stopBean.stateMap}">
                                 <ace:column headerText="Id" rendered ="false" >
                                     <h:outputText value="#{st.idStop}"/>
                                 </ace:column>
@@ -56,8 +56,8 @@
                         </td>
                         <td>
                             <ace:dataTable value="#{stopBean.getSecondStops()}"
-                                           var="st">
-                                          <!-- stateMap="#{stopBean.stateMap}"-->
+                                           var="st"
+                                           stateMap="#{stopBean.stateMap}">
                                 <ace:column headerText="Id" rendered ="false">
                                     <h:outputText value="#{st.idStop}"/>
                                 </ace:column>
@@ -78,9 +78,9 @@
                     </tr>
                 </table> 
                 <ace:dataTable value="#{stopBean.getAllStops()}"
-                               var="st">
-                               <!--stateMap="#{addStopBean.stateMap}"  
-                               selectionMode="single"-->
+                               var="st"
+                               stateMap="#{addStopBean.stateMap}"  
+                               selectionMode="single">
                     <ace:column headerText="Id" rendered ="false">
                         <h:outputText value="#{st.idStop}"/>
                     </ace:column>

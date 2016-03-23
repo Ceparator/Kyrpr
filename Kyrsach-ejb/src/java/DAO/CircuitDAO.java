@@ -5,10 +5,13 @@
  */
 package DAO;
 
+import javax.ejb.Stateful;
+
 /**
  *
  * @author Ceparator
  */
+@Stateful
 public class CircuitDAO {
     
 }

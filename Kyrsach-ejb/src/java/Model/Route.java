@@ -32,13 +32,15 @@ public class Route {
         this.rating = rating;
     }
 
-    public Route(int idRoute, int number, Stop firstStop, Stop lastStop, int first, int second) {
+    public Route(int idRoute, int number, Stop firstStop, Stop lastStop, int first, int second, int price, int rating) {
         this.idRoute = idRoute;
         this.number = number;
         this.firstStop = firstStop;
         this.lastStop = lastStop;
         this.first = first;
         this.second = second;
+        this.price = price;
+        this.rating = rating;
     }
 
     public Route(int idRoute, Circuit firstScheme, Circuit secondScheme) {
@@ -46,6 +48,8 @@ public class Route {
         this.firstScheme = firstScheme;
         this.secondScheme = secondScheme;
     }
+    
+    
 
     public Route() {
 

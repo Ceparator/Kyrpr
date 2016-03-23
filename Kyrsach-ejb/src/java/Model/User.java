@@ -19,10 +19,11 @@ public class User {
     public User() {
     }
 
-    public User(String username, String password, int routeNumber) {
+    public User(String username, String password, int routeNumber, String role) {
         this.username = username;
         this.password = password;
         this.routeNumber = routeNumber;
+        this.role = role;
     }
 
     public String getPassword() {

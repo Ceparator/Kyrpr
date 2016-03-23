@@ -23,16 +23,14 @@ import javax.faces.context.FacesContext;
 public class AddUserBean {
 
     @EJB
-    private UserDAO userDAO;
+    private UserDAO userDAO = new UserDAO();
 
     private User user;
-    private int smth;
 
     @PostConstruct
     private void initializeBean() {
-        System.out.println("=========== adUser = ");
         user = new User();
-        smth = 20;
+        user.setRole("user");
     }
 
     public User getUser() {
@@ -43,14 +41,6 @@ public class AddUserBean {
         this.user = user;
     }
 
-    public int getSmth() {
-        return smth;
-    }
-
-    public void setSmth(int smth) {
-        this.smth = smth;
-    }
-    
     public String logout() throws Exception {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/index.xhtml?faces-redirect=true";
@@ -60,5 +50,4 @@ public class AddUserBean {
         userDAO.addUser(user.getUsername(), user.getPassword(), user.getRole(), user.getRouteNumber());
         return "/index.xhtml";
     }
-
 }

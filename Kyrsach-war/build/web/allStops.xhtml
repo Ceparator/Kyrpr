@@ -16,9 +16,9 @@
                     <h:outputLabel value="Stops"/> 
                 </h2> 
                 <ace:dataTable value="#{stopBean.getAllStops()}"
-                               var="st">
-                            <!--   stateMap="#{stopBean.stateMap}"  
-                               selectionMode="multiple"> --> 
+                               var="st"
+                               stateMap="#{stopBean.stateMap}"  
+                               selectionMode="multiple"> 
                     <ace:column headerText="Id" sortBy="#{st.idStop} "
                                 rendered ="true" filterBy="#{st.idStop}" filterMatchMode="contains">
                         <h:outputText value="#{st.idStop}"/>
@@ -35,14 +35,14 @@
                                 filterBy="#{st.coordY}" filterMatchMode="contains">
                         <h:outputText value="#{st.coordY}"/>
                     </ace:column>
-                    <ace:column headerText="" rendered="#{request.isUserInRole('admin')}">
+                    <ace:column headerText=""> <!--rendered="#{request.isUserInRole('admin')}" -->
                         <h:commandLink action="#{stopBean.editStop(st.idStop)}" value="Редатировать остановку"/>
                     </ace:column>
                 </ace:dataTable>
                 <br/><br/>
                 <h:commandButton value="Look at the routes" action="/allRoutes.xhtml"/>
                 <br/><br/>
-                <h:commandButton value="Delete stops" rendered="#{request.isUserInRole('admin')}" actionListener="#{stopBean.actionListener}"/>
+                <h:commandButton value="Delete stops" actionListener="#{stopBean.actionListener}"/> <!--rendered="#{request.isUserInRole('admin')}" -->
                 <br/><br/>
                 <h:commandButton value="Add stop"  action="/addStop.xhtml"/>
             </h:form> 

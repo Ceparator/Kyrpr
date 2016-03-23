@@ -7,12 +7,13 @@ package ManageBeans;
 
 import DAO.StopDAO;
 import Model.Stop;
-import java.awt.event.ActionEvent;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.event.ActionEvent;
+import javax.inject.Inject;
 import org.icefaces.ace.model.table.RowStateMap;
 
 /**

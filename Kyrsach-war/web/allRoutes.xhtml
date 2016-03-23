@@ -16,9 +16,9 @@
                     <h:outputLabel value="Routes"/> 
                 </h2> 
                 <ace:dataTable value="#{routeBean.getAllRoutes()}"
-                               var="rt">
-                <!--               stateMap="#{routeBean.stateMap}"  
-                               selectionMode="single" -->
+                               var="rt"
+                               stateMap="#{routeBean.stateMap}"  
+                               selectionMode="single">
                     <ace:column headerText="Id" sortBy="#{rt.idRoute} "
                                 rendered ="false" filterBy="#{rt.idRoute}" filterMatchMode="contains">
                         <h:outputText value="#{rt.idRoute}"/>
@@ -58,9 +58,9 @@
                 <br/><br/>
                 <h:commandButton value="Check stops" action="/allStops.xhtml"/>
                 <br/><br/>
-                <h:commandButton value="Add route" rendered="#{request.isUserInRole('admin')}" action="/addRoute.xhtml"/>
+                <h:commandButton value="Add route"  action="/addRoute.xhtml"/> <!--rendered="#{request.isUserInRole('admin')}" -->
                 <br/><br/>
-                <h:commandButton value="Delete route" rendered="#{request.isUserInRole('admin')}" actionListener="#{routeBean.actionListener}"/>
+                <h:commandButton value="Delete route"  actionListener="#{routeBean.actionListener}"/> <!--rendered="#{request.isUserInRole('admin')}" -->
             </h:form> 
         </f:view>
     </h:body>

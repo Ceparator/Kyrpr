@@ -16,9 +16,9 @@
                     <h:outputLabel value="Reports"/> 
                 </h2> 
                 <ace:dataTable value="#{reportBean.getAllReports()}"
-                               var="rep">
-                            <!--   stateMap="#{reportBean.stateMap}"  
-                               selectionMode="multiple">-->
+                               var="rep"
+                               stateMap="#{reportBean.stateMap}"  
+                               selectionMode="multiple">
                     <ace:column headerText="Id" sortBy="#{rep.idReport} "
                                 rendered ="true" filterBy="#{rep.idReport}" filterMatchMode="contains">
                         <h:outputText value="#{rep.idReport}"/>
@@ -39,14 +39,14 @@
                                 filterBy="#{rep.sum}" filterMatchMode="contains">
                         <h:outputText value="#{rep.sum}"/>
                     </ace:column>
-                    <ace:column headerText="" rendered="#{request.isUserInRole('admin')}">
+                    <ace:column headerText="" > <!--rendered="#{request.isUserInRole('admin')}" -->
                         <h:commandLink action="#{reportBean.editReport(rep.idReport)}" value="Редатировать отчет"/>
                     </ace:column>
                 </ace:dataTable>
                 <br/><br/>
                 <h:commandButton value="Look at the routes" action="/allRoutes.xhtml"/>
                 <br/><br/>
-                <h:commandButton value="Delete reports" rendered="#{request.isUserInRole('admin')}" actionListener="#{reportBean.actionListener}"/>
+                <h:commandButton value="Delete reports" actionListener="#{reportBean.actionListener}"/>  <!--rendered="#{request.isUserInRole('admin')}" -->
                 <br/><br/>
                 <h:commandButton value="Add report"  action="/addReport.xhtml"/>
             </h:form> 

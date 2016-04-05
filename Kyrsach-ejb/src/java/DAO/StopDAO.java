@@ -7,55 +7,50 @@ package DAO;
 
 import Model.Stop;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.ejb.Stateful;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
  * @author Ceparator
  */
 @Stateful
-public class StopDAO {
+public class StopDAO implements StopDAOInterface {
 
-    public void deleteStop(List<Stop> selectedStopList) {
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @PersistenceContext(unitName = "Kyrsach-ejbPU")
+    private EntityManager em;
+
+    @Override
+    public void deleteStop(List<Stop> selectedStopList) throws Exception {
+        Iterator<Stop> iter = selectedStopList.iterator();
+        try {
+            while (iter.hasNext()) {
+                Stop item = iter.next();
+                Stop someStop = em.getReference(Stop.class, item.getIdStop());
+                em.remove(someStop);
+            }
+        } catch (Exception ex) {
+            throw new Exception(ex);
+        }
     }
 
+    @Override
     public List<Stop> getAllStops() {
-        ArrayList<Stop> stopList = new ArrayList<>();
-        Stop stop = new Stop(10, 10, "smth", 12.0, 12.0);
-        stopList.add(stop);
-        return stopList;
+        Query query = em.createQuery("SELECT s FROM Stop s", Stop.class);
+        return query.getResultList();
     }
 
-    public List<Stop> getFirstStop() {
-        ArrayList<Stop> stopList = new ArrayList<>();
-        return stopList;
+    @Override
+    public void addStop(Stop stop) {
+        em.persist(stop);
     }
 
-    public List<Stop> getSecondStop() {
-        ArrayList<Stop> stopList = new ArrayList<>();
-        return stopList;
+    @Override
+    public void editStop(Stop stop) {
+        em.merge(stop);
     }
-
-    public void addStop(String name, Double coordX, Double coordY) {
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void editStop(int idStop, String name, Double coordX, Double coordY) {
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void addStopForFirstCircuit(Stop item) {
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void addStopForSecondCircuit(Stop item) {
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void mirrorRoute() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

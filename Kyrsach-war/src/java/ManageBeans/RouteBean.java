@@ -6,6 +6,7 @@
 package ManageBeans;
 
 import DAO.RouteDAO;
+import DAO.RouteDAOInterface;
 import DAO.StopDAO;
 import Model.Route;
 import Model.Circuit;
@@ -15,6 +16,7 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import org.icefaces.ace.model.table.RowStateMap;
 
@@ -27,9 +29,14 @@ import org.icefaces.ace.model.table.RowStateMap;
 public class RouteBean implements Serializable {
 
     @EJB
-    private RouteDAO routeDAO;
+    private RouteDAOInterface routeDAO;
 
     private int numberRoute;
+    
+    @PostConstruct
+    private void initializeBean() {
+        numberRoute = 0;
+    }
 
     public int getNumberRoute() {
         return numberRoute;
@@ -37,13 +44,6 @@ public class RouteBean implements Serializable {
 
     public void setNumberRoute(int numberRoute) {
         this.numberRoute = numberRoute;
-    }
-
-    public RouteBean(int numberRoute) {
-        this.numberRoute = numberRoute;
-    }
-
-    public RouteBean() {
     }
 
     private RowStateMap stateMap;
@@ -61,7 +61,7 @@ public class RouteBean implements Serializable {
         Iterator<Route> iter = selectedRouteList.iterator();
         while (iter.hasNext()) {
             Route item = iter.next();
-            routeDAO.deleteRoute(item.getIdRoute(), item.getFirst(), item.getSecond());
+            routeDAO.deleteRoute(item);
         }
     }
 

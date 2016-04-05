@@ -12,6 +12,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import org.icefaces.ace.model.table.RowStateMap;
 
@@ -28,8 +29,9 @@ public class ReportBean implements Serializable {
 
     private int editId;
 
-    public ReportBean(int editId) {
-        this.editId = editId;
+    @PostConstruct
+    private void initializeBean() {
+        editId = 0;
     }
 
     public int getEditId() {
@@ -38,9 +40,6 @@ public class ReportBean implements Serializable {
 
     public void setEditId(int editId) {
         this.editId = editId;
-    }
-
-    public ReportBean() {
     }
 
     private RowStateMap stateMap;

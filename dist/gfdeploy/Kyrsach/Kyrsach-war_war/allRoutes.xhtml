@@ -35,14 +35,6 @@
                                 filterBy="#{rt.lastStop.name}" filterMatchMode="contains">
                         <h:outputText value="#{rt.lastStop.name}"/>
                     </ace:column>
-                    <ace:column headerText="First scheme id" sortBy="#{rt.first} "
-                                rendered ="false" filterBy="#{rt.first}" filterMatchMode="contains">
-                        <h:outputText value="#{rt.first}"/>
-                    </ace:column>
-                    <ace:column headerText="Second scheme id" sortBy="#{rt.second} "
-                                rendered ="false" filterBy="#{rt.second}" filterMatchMode="contains">
-                        <h:outputText value="#{rt.second}"/>
-                    </ace:column>
                     <ace:column headerText="Rating" sortBy="#{rt.rating} "
                                 rendered ="true" filterBy="#{rt.rating}" filterMatchMode="contains">
                         <h:outputText value="#{rt.rating}"/>
@@ -52,7 +44,7 @@
                         <h:outputText value="#{rt.price}"/>
                     </ace:column>
                     <ace:column headerText="">
-                        <h:commandLink action="#{routeBean.redirectRouteInfo(rt.idRoute)}" value="Просмотреть маршрут"/>
+                        <h:commandLink action="#{routeBean.redirectRouteInfo(rt.idRoute)}" value="Route info"/>
                     </ace:column>
                 </ace:dataTable>
                 <br/><br/>

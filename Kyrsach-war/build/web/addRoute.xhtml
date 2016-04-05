@@ -17,14 +17,14 @@
 
                 <p align="center"> 
                     <h:outputLabel value="The number of the new route    " for="number"/>
-                    <h:inputText id="number" value="#{addRouteBean.number}" required="true"> 
+                    <h:inputText id="number" value="#{addRouteBean.route.number}" required="true"> 
                         <f:validateLongRange maximum="1000" minimum="1"/>
                     </h:inputText> 
                     <h:message for="number" style="color:red" />    
                 </p> 
                 <p align="center"> 
                     <h:outputLabel value="The ticket price of the new route    " for="price"/>
-                    <h:inputText id="price" value="#{addRouteBean.ticketprice}" required="true"> 
+                    <h:inputText id="price" value="#{addRouteBean.route.price}" required="true"> 
                         <f:validateLongRange maximum="1000" minimum="1"/>
                     </h:inputText> 
                     <h:message for="price" style="color:red" />    
@@ -32,9 +32,9 @@
                 <table align="center"> 
                     <tr>
                         <td>
-                            <ace:dataTable value="#{stopBean.getFirstStops()}"
+                            <ace:dataTable value="#{addRouteBean.firstStops}"
                                            var="st"
-                                           stateMap="#{stopBean.stateMap}">
+                                           stateMap="#{addRouteBean.stateMap}">
                                 <ace:column headerText="Id" rendered ="false" >
                                     <h:outputText value="#{st.idStop}"/>
                                 </ace:column>
@@ -55,9 +55,9 @@
                         <td style="width: 20px;">
                         </td>
                         <td>
-                            <ace:dataTable value="#{stopBean.getSecondStops()}"
+                            <ace:dataTable value="#{addRouteBean.secondStops}"
                                            var="st"
-                                           stateMap="#{stopBean.stateMap}">
+                                           stateMap="#{addRouteBean.stateMap}">
                                 <ace:column headerText="Id" rendered ="false">
                                     <h:outputText value="#{st.idStop}"/>
                                 </ace:column>
@@ -78,9 +78,7 @@
                     </tr>
                 </table> 
                 <ace:dataTable value="#{stopBean.getAllStops()}"
-                               var="st"
-                               stateMap="#{addStopBean.stateMap}"  
-                               selectionMode="single">
+                               var="st">
                     <ace:column headerText="Id" rendered ="false">
                         <h:outputText value="#{st.idStop}"/>
                     </ace:column>
@@ -96,20 +94,22 @@
                                 filterBy="#{st.coordY}" filterMatchMode="contains">
                         <h:outputText value="#{st.coordY}"/>
                     </ace:column>
+                    <ace:column headerText="">
+                        <h:commandLink action="#{addRouteBean.addFirstStops(st)}" value="To the first scheme"/>
+                    </ace:column>
+                    <ace:column headerText="">
+                        <h:commandLink action="#{addRouteBean.addSecondStops(st)}" value="To the second scheme"/>
+                    </ace:column>
                 </ace:dataTable>
-                <p align="center"> 
-                    <h:commandButton  value="Add stop to the first scheme" actionListener="#{addStopBean.addNewFirstStop}"/> 
-                    <h:commandButton  value="Add stop to the second scheme" actionListener="#{addStopBean.addNewSecondStop}"/> 
-                </p>
                 <br/>
                 <p align="center"> 
-                    <h:commandButton  value="Mirror he first scheme" action="#{addStopBean.mirror()}"/> 
-                </p>
-                 <p align="center"> 
-                    <h:commandButton  value="Cancel" action="#{addRouteBean.cancelAddRoute()}"/> 
+                    <h:commandButton  value="Mirror he first scheme" action="#{addRouteBean.mirror()}"/> 
                 </p>
                 <p>
                     <h:commandButton  value="Save the route" action="#{addRouteBean.addNewRoute()}"/>
+                </p>
+                <p align="center"> 
+                    <h:commandButton  value="Back to route list" action="/allRoutes.xhtml"/> 
                 </p>
             </h:form> 
         </f:view>

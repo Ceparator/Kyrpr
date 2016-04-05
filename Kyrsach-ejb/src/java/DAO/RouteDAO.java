@@ -8,46 +8,56 @@ package DAO;
 import Model.Circuit;
 import Model.Route;
 import Model.Stop;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateful;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
  * @author Ceparator
  */
 @Stateful
-public class RouteDAO {
+public class RouteDAO implements RouteDAOInterface {
 
-    public void deleteRoute(int idRoute, int first, int second) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @PersistenceContext(unitName = "Kyrsach-ejbPU")
+    private EntityManager em;
+
+    @Override
+    public void deleteRoute(Route route) {
+        Route smth = em.getReference(Route.class, route.getIdRoute());
+        em.remove(smth);
     }
 
+    @Override
     public List<Route> getAllRoutes() {
-        ArrayList<Route> routeList = new ArrayList<>();
-        Stop stop = new Stop(10, 10, "smth", 12.0, 12.0);
-        Stop stop2 = new Stop(12, 14, "smth2", 13.0, 113.0);
-        Route route = new Route(10, 10, stop, stop2, 10,10,10,10);
-        routeList.add(route);
-        return routeList;
+        Query query = em.createQuery("SELECT r FROM Route r", Route.class);
+        return query.getResultList();
     }
 
-    public List<Circuit> getRouteSecondCircuit(int idRoute) {
-        ArrayList<Circuit> circuitList = new ArrayList<>();
-        return circuitList;
-    }
-
+    @Override
     public List<Circuit> getRouteFirstCircuit(int idRoute) {
-        ArrayList<Circuit> circuitList = new ArrayList<>();
-        return circuitList;
+        Query query = em.createQuery("SELECT c FROM Circuit c WHERE c.idRoute = ?1 AND c.tyda = ?2 ORDER BY c.stopNumber ASC", Circuit.class);
+        query.setParameter(1, em.getReference(Route.class, idRoute));
+        query.setParameter(2, true);
+        return query.getResultList();
     }
 
-    public void cancelAddRoute() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Override
+    public List<Circuit> getRouteSecondCircuit(int idRoute) {
+        Query query = em.createQuery("SELECT c FROM Circuit c WHERE c.idRoute = ?1 AND c.tyda = ?2 ORDER BY c.stopNumber ASC", Circuit.class);
+        query.setParameter(1, em.getReference(Route.class, idRoute));
+        query.setParameter(2, false);
+        return query.getResultList();
     }
 
-    public void addRoute(int number, int ticketprice) {
-        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Override
+    public int addRoute(Route route, Stop stop1, Stop stop2) {
+        route.setFirstStop(stop1);
+        route.setLastStop(stop2);
+        em.persist(route);
+        em.flush();
+        return route.getIdRoute();
     }
-
 }

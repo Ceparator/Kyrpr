@@ -6,6 +6,7 @@
 package ManageBeans;
 
 import DAO.StopDAO;
+import DAO.StopDAOInterface;
 import Model.Stop;
 import javax.faces.event.ActionEvent;
 import java.sql.SQLException;
@@ -26,7 +27,7 @@ import org.icefaces.ace.model.table.RowStateMap;
 public class AddStopBean {
 
     @EJB
-    private StopDAO stopDAO;
+    private StopDAOInterface stopDAO;
 
     private Stop stop;
     private RowStateMap stateMap;
@@ -53,35 +54,13 @@ public class AddStopBean {
     }
 
     public String addNewStop() throws SQLException, Exception {
-        stopDAO.addStop(stop.getName(), stop.getCoordX(), stop.getCoordY());
+        stopDAO.addStop(stop);
         return "/allStops.xhtml";
     }
 
     public String editStop(int idStop) throws SQLException, Exception {
-        stopDAO.editStop(idStop, stop.getName(), stop.getCoordX(), stop.getCoordY());
+        Stop somestop = new Stop(idStop, stop.getName(), stop.getCoordX(), stop.getCoordY());
+        stopDAO.editStop(somestop);
         return "/allStops.xhtml";
     }
-
-    public void addNewFirstStop(ActionEvent event) throws Exception {
-        List<Stop> selectedStopList = (List<Stop>) stateMap.getSelected();
-        Iterator<Stop> iter = selectedStopList.iterator();
-        while (iter.hasNext()) {
-            Stop item = iter.next();
-            stopDAO.addStopForFirstCircuit(item);
-        }
-    }
-
-    public void addNewSecondStop(ActionEvent event) throws Exception {
-        List<Stop> selectedStopList = (List<Stop>) stateMap.getSelected();
-        Iterator<Stop> iter = selectedStopList.iterator();
-        while (iter.hasNext()) {
-            Stop item = iter.next();
-            stopDAO.addStopForSecondCircuit(item);
-        }
-    }
-
-    public void mirror() throws SQLException, Exception {
-        stopDAO.mirrorRoute();
-    }
-
 }

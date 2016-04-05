@@ -5,77 +5,86 @@
  */
 package Model;
 
+import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
 /**
  *
  * @author Ceparator
  */
-public class Route {
+@Entity
+@Table(name = "route")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Route.findAll", query = "SELECT r FROM Route r"),
+    @NamedQuery(name = "Route.findByIdRoute", query = "SELECT r FROM Route r WHERE r.idRoute = :idRoute"),
+    @NamedQuery(name = "Route.findByNumber", query = "SELECT r FROM Route r WHERE r.number = :number"),
+    @NamedQuery(name = "Route.findByRating", query = "SELECT r FROM Route r WHERE r.rating = :rating"),
+    @NamedQuery(name = "Route.findByPrice", query = "SELECT r FROM Route r WHERE r.price = :price")})
+public class Route implements Serializable {
 
-    private int idRoute;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "idRoute")
+    private Integer idRoute;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "number")
     private int number;
-    private int first;
-    private int second;
-    private Stop firstStop;
-    private Stop lastStop;
-    private Circuit firstScheme;
-    private Circuit secondScheme;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "rating")
+    private double rating;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "price")
     private int price;
-    private int rating;
-
-    public Route(int number, Stop firstStop, Stop lastStop, Circuit firstScheme, Circuit secondScheme, int price, int rating) {
-        this.number = number;
-        this.firstStop = firstStop;
-        this.lastStop = lastStop;
-        this.firstScheme = firstScheme;
-        this.secondScheme = secondScheme;
-        this.price = price;
-        this.rating = rating;
-    }
-
-    public Route(int idRoute, int number, Stop firstStop, Stop lastStop, int first, int second, int price, int rating) {
-        this.idRoute = idRoute;
-        this.number = number;
-        this.firstStop = firstStop;
-        this.lastStop = lastStop;
-        this.first = first;
-        this.second = second;
-        this.price = price;
-        this.rating = rating;
-    }
-
-    public Route(int idRoute, Circuit firstScheme, Circuit secondScheme) {
-        this.idRoute = idRoute;
-        this.firstScheme = firstScheme;
-        this.secondScheme = secondScheme;
-    }
-    
-    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idRoute")
+    private List<Circuit> circuitList;
+    @JoinColumn(name = "firstStop", referencedColumnName = "idStop")
+    @ManyToOne(optional = false)
+    private Stop firstStop;
+    @JoinColumn(name = "lastStop", referencedColumnName = "idStop")
+    @ManyToOne(optional = false)
+    private Stop lastStop;
 
     public Route() {
-
     }
 
-    public Circuit getFirstScheme() {
-        return firstScheme;
+    public Route(Integer idRoute) {
+        this.idRoute = idRoute;
     }
 
-    public void setFirstScheme(Circuit firstScheme) {
-        this.firstScheme = firstScheme;
+    public Route(Integer idRoute, int number, double rating, int price) {
+        this.idRoute = idRoute;
+        this.number = number;
+        this.rating = rating;
+        this.price = price;
     }
 
-    public Circuit getSecondScheme() {
-        return secondScheme;
-    }
-
-    public void setSecondScheme(Circuit secondScheme) {
-        this.secondScheme = secondScheme;
-    }
-
-    public int getIdRoute() {
+    public Integer getIdRoute() {
         return idRoute;
     }
 
-    public void setIdRoute(int idRoute) {
+    public void setIdRoute(Integer idRoute) {
         this.idRoute = idRoute;
     }
 
@@ -85,6 +94,31 @@ public class Route {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    @XmlTransient
+    public List<Circuit> getCircuitList() {
+        return circuitList;
+    }
+
+    public void setCircuitList(List<Circuit> circuitList) {
+        this.circuitList = circuitList;
     }
 
     public Stop getFirstStop() {
@@ -103,37 +137,29 @@ public class Route {
         this.lastStop = lastStop;
     }
 
-    public int getFirst() {
-        return first;
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idRoute != null ? idRoute.hashCode() : 0);
+        return hash;
     }
 
-    public void setFirst(int first) {
-        this.first = first;
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Route)) {
+            return false;
+        }
+        Route other = (Route) object;
+        if ((this.idRoute == null && other.idRoute != null) || (this.idRoute != null && !this.idRoute.equals(other.idRoute))) {
+            return false;
+        }
+        return true;
     }
 
-    public int getSecond() {
-        return second;
-    }
-
-    public void setSecond(int second) {
-        this.second = second;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
+    @Override
+    public String toString() {
+        return "Model.Route[ idRoute=" + idRoute + " ]";
     }
     
-
 }

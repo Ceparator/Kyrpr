@@ -36,7 +36,7 @@
                         <h:outputText value="#{st.coordY}"/>
                     </ace:column>
                     <ace:column headerText=""> <!--rendered="#{request.isUserInRole('admin')}" -->
-                        <h:commandLink action="#{stopBean.editStop(st.idStop)}" value="Редатировать остановку"/>
+                        <h:commandLink action="#{stopBean.ToEditStop(st.idStop)}" value="Edit stop"/>
                     </ace:column>
                 </ace:dataTable>
                 <br/><br/>

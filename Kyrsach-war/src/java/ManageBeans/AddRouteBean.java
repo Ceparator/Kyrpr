@@ -5,51 +5,127 @@
  */
 package ManageBeans;
 
-import DAO.RouteDAO;
+import DAO.CircuitDAOInterface;
+import DAO.RouteDAOInterface;
+import Model.Circuit;
+import Model.Route;
+import Model.Stop;
+import com.google.common.collect.Lists;
+import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.event.ActionEvent;
+import org.icefaces.ace.model.table.RowStateMap;
 
 /**
  *
  * @author Ceparator
  */
 @Named(value = "addRouteBean")
-@RequestScoped
-public class AddRouteBean {
+@SessionScoped
+public class AddRouteBean implements Serializable {
 
     @EJB
-    private RouteDAO routeDAO;
+    private RouteDAOInterface routeDAO;
+    @EJB
+    private CircuitDAOInterface circuitDAO;
 
-    private int number;
-    private int ticketprice;
+    private Route route;
+    private List<Stop> firstStops;
+    private List<Stop> secondStops;
 
-    public int getTicketprice() {
-        return ticketprice;
+    @PostConstruct
+    private void initializeBean() {
+        route = new Route();
+        firstStops = new ArrayList<>();
+        secondStops = new ArrayList<>();
     }
 
-    public void setTicketprice(int ticketprice) {
-        this.ticketprice = ticketprice;
+    public Route getRoute() {
+        return route;
     }
 
-    public int getNumber() {
-        return number;
+    public void setRoute(Route route) {
+        this.route = route;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public List<Stop> getFirstStops() {
+        return firstStops;
     }
 
-    public String addNewRoute() throws SQLException {
-        routeDAO.addRoute(number, ticketprice);
+    public void setFirstStops(List<Stop> firstStops) {
+        this.firstStops = firstStops;
+    }
+
+    public List<Stop> getSecondStops() {
+        return secondStops;
+    }
+
+    public void setSecondStops(List<Stop> secondStops) {
+        this.secondStops = secondStops;
+    }
+
+    private RowStateMap stateMap;
+
+    public RowStateMap getStateMap() {
+        return stateMap;
+    }
+
+    public void setStateMap(RowStateMap stateMap) {
+        this.stateMap = stateMap;
+    }
+
+    public String addNewRoute() throws SQLException, Exception {
+        route.setRating(0);
+        int count = 1;
+        List<Circuit> firstCircuit = new ArrayList<>();
+        List<Circuit> secondCircuit = new ArrayList<>();
+        int idRoute = routeDAO.addRoute(route, firstStops.get(0), secondStops.get(0));
+        Iterator<Stop> iter = firstStops.iterator();
+        while (iter.hasNext()) {
+            Circuit circuit = new Circuit();
+            circuit.setStopNumber(count);
+            circuit.setTyda(true);
+            circuit.setIdStop(iter.next());
+            firstCircuit.add(circuit);
+            count++;
+        }
+        count = 1;
+        iter = secondStops.iterator();
+        while (iter.hasNext()) {
+            Circuit circuit = new Circuit();
+            circuit.setStopNumber(count);
+            circuit.setTyda(false);
+            circuit.setIdStop(iter.next());
+            secondCircuit.add(circuit);
+            count++;
+        }  
+        circuitDAO.addCircuit(firstCircuit, idRoute);
+        circuitDAO.addCircuit(secondCircuit, idRoute);
         return "/allRoutes.xhtml";
     }
 
-    public String cancelAddRoute() throws SQLException {
-        routeDAO.cancelAddRoute();
-        return "/allRoutes.xhtml";
+    public void addFirstStops(Stop stop) throws Exception {
+        if (!firstStops.contains(stop)) {
+            firstStops.add(stop);
+        }
     }
 
+    public void addSecondStops(Stop stop) throws Exception {
+        if (!secondStops.contains(stop)) {
+            secondStops.add(stop);
+        }
+    }
+
+    public void mirror() {
+        secondStops = Lists.reverse(firstStops);
+    }
 }

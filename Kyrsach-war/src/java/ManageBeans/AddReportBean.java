@@ -6,6 +6,7 @@
 package ManageBeans;
 
 import DAO.ReportDAO;
+import DAO.ReportDAOInterface;
 import Model.Report;
 import java.sql.SQLException;
 import javax.annotation.PostConstruct;
@@ -23,7 +24,7 @@ import org.icefaces.ace.model.table.RowStateMap;
 public class AddReportBean {
 
     @EJB
-    private ReportDAO reportDAO;
+    private ReportDAOInterface reportDAO;
 
     private Report report;
     private RowStateMap stateMap;

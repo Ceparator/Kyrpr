@@ -3,28 +3,31 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/addUser.xhtml</file>
-            <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/addCircuit.xhtml</file>
             <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/addRoute.xhtml</file>
-            <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/src/java/ManageBeans/AddCircuitBean.java</file>
             <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/editCircuit.xhtml</file>
             <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/addReport.xhtml</file>
             <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/loginerror.xhtml</file>
-            <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/src/java/ManageBeans/AddReportBean.java</file>
-            <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/login.xhtml</file>
             <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/allStops.xhtml</file>
+            <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/src/java/ManageBeans/ReportBean.java</file>
+            <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/src/java/ManageBeans/StopBean.java</file>
+            <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/routeCircuit.xhtml</file>
+            <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/index.html</file>
+            <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/src/java/ManageBeans/AddUserBean.java</file>
+            <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/allRoutes.xhtml</file>
+            <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/editReport.xhtml</file>
+            <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/src/java/ManageBeans/CircuitBean.java</file>
+            <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/addUser.xhtml</file>
+            <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/addCircuit.xhtml</file>
+            <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/login.xhtml</file>
             <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/404.xhtml</file>
             <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/addStop.xhtml</file>
             <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/index.xhtml</file>
-            <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/src/java/ManageBeans/StopBean.java</file>
-            <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/routeCircuit.xhtml</file>
             <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/src/java/ManageBeans/UserBean.java</file>
-            <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/allRoutes.xhtml</file>
-            <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/WEB-INF/web.xml</file>
             <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/src/java/ManageBeans/AddRouteBean.java</file>
-            <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/editReport.xhtml</file>
-            <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/src/java/ManageBeans/CircuitBean.java</file>
             <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/editStop.xhtml</file>
+            <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/WEB-INF/faces-config.xml</file>
+            <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/src/java/ManageBeans/RouteBean.java</file>
             <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/allReports.xhtml</file>
             <file>file:/C:/Users/Ceparator/Documents/NetBeansProjects/Kyrsach/Kyrsach-war/web/allUsers.xhtml</file>
         </group>

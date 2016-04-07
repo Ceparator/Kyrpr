@@ -5,13 +5,17 @@
  */
 package ManageBeans;
 
-import DAO.UserDAO;
-import Model.User;
+import DAO.MyuserDAO;
+import DAO.MyuserDAOInterface;
+import DAO.RouteDAOInterface;
+import Model.Myuser;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -22,13 +26,9 @@ import javax.enterprise.context.SessionScoped;
 public class UserBean implements Serializable {
 
     @EJB
-    private UserDAO userDAO;
+    private MyuserDAOInterface userDAO;
 
-    public UserBean() {
-    }
-
-    public List<User> getAllUsers() throws Exception {
+    public List<Myuser> getAllUsers() throws Exception {
         return userDAO.getAllUsers();
     }
-
 }

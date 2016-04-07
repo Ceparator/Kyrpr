@@ -7,7 +7,7 @@
     <h:head>
         <title>All users</title>
     </h:head>
-        <h:body>
+    <h:body>
         <f:view> 
             <tr> 
             </tr> 
@@ -28,6 +28,8 @@
                         <h:outputText value="#{us.routeNumber}"/>
                     </ace:column>
                 </ace:dataTable>
+                <br/><br/>
+                <h:commandButton value="Add new user" action="/addUser.xhtml"/>
                 <br/><br/>
                 <h:commandButton value="Home page" action="/index.xhtml"/>
             </h:form> 

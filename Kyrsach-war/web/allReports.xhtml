@@ -35,12 +35,12 @@
                                 filterBy="#{rep.vremya}" filterMatchMode="contains">
                         <h:outputText value="#{rep.vremya}"/>
                     </ace:column>
-                    <ace:column headerText="Sum" sortBy="#{rep.sum}"
-                                filterBy="#{rep.sum}" filterMatchMode="contains">
-                        <h:outputText value="#{rep.sum}"/>
+                    <ace:column headerText="Sum" sortBy="#{rep.summa}"
+                                filterBy="#{rep.summa}" filterMatchMode="contains">
+                        <h:outputText value="#{rep.summa}"/>
                     </ace:column>
-                    <ace:column headerText="" > <!--rendered="#{request.isUserInRole('admin')}" -->
-                        <h:commandLink action="#{reportBean.editReport(rep.idReport)}" value="Редатировать отчет"/>
+                    <ace:column headerText="" rendered="#{request.isUserInRole('conductor')}" >
+                        <h:commandLink action="#{reportBean.editReport(rep.idReport)}" value="Edit report"/>
                     </ace:column>
                 </ace:dataTable>
                 <br/><br/>
@@ -48,7 +48,7 @@
                 <br/><br/>
                 <h:commandButton value="Delete reports" actionListener="#{reportBean.actionListener}"/>  <!--rendered="#{request.isUserInRole('admin')}" -->
                 <br/><br/>
-                <h:commandButton value="Add report"  action="/addReport.xhtml"/>
+                <h:commandButton value="Add report" rendered="#{request.isUserInRole('conductor')}" action="#{reportBean.toAddReport()}" />
             </h:form> 
         </f:view> 
     </h:body>

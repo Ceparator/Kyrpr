@@ -5,44 +5,82 @@
  */
 package Model;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Ceparator
  */
-public class Report {
-    int idReport;
-    int routeNumber;
-    int tickets;
-    Date vremya;
-    int sum;
-    
+@Entity
+@Table(name = "report")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Report.findAll", query = "SELECT r FROM Report r"),
+    @NamedQuery(name = "Report.findByIdReport", query = "SELECT r FROM Report r WHERE r.idReport = :idReport"),
+    @NamedQuery(name = "Report.findByRouteNumber", query = "SELECT r FROM Report r WHERE r.routeNumber = :routeNumber"),
+    @NamedQuery(name = "Report.findByTickets", query = "SELECT r FROM Report r WHERE r.tickets = :tickets"),
+    @NamedQuery(name = "Report.findByVremya", query = "SELECT r FROM Report r WHERE r.vremya = :vremya"),
+    @NamedQuery(name = "Report.findBySumma", query = "SELECT r FROM Report r WHERE r.summa = :summa")})
+public class Report implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "idReport")
+    private Integer idReport;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "routeNumber")
+    private int routeNumber;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "tickets")
+    private int tickets;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "vremya")
+    @Temporal(TemporalType.DATE)
+    private Date vremya;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "summa")
+    private int summa;
 
     public Report() {
     }
 
-    public Report(int idReport, int routeNumber, int tickets, Date vremya, int sum) { //для вывода
+    public Report(Integer idReport) {
+        this.idReport = idReport;
+    }
+
+    public Report(Integer idReport, int routeNumber, int tickets, Date vremya, int summa) {
         this.idReport = idReport;
         this.routeNumber = routeNumber;
         this.tickets = tickets;
         this.vremya = vremya;
-        this.sum = sum;
+        this.summa = summa;
     }
 
-    public Report(int idReport, int routeNumber, int tickets, Date vremya) { //для добавления - сумма считается сама
-        this.idReport = idReport;
-        this.routeNumber = routeNumber;
-        this.tickets = tickets;
-        this.vremya = vremya;
-    }
-    
-
-    public int getIdReport() {
+    public Integer getIdReport() {
         return idReport;
     }
 
-    public void setIdReport(int idReport) {
+    public void setIdReport(Integer idReport) {
         this.idReport = idReport;
     }
 
@@ -70,13 +108,37 @@ public class Report {
         this.vremya = vremya;
     }
 
-    public int getSum() {
-        return sum;
+    public int getSumma() {
+        return summa;
     }
 
-    public void setSum(int sum) {
-        this.sum = sum;
+    public void setSumma(int summa) {
+        this.summa = summa;
     }
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idReport != null ? idReport.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Report)) {
+            return false;
+        }
+        Report other = (Report) object;
+        if ((this.idReport == null && other.idReport != null) || (this.idReport != null && !this.idReport.equals(other.idReport))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Model.Report[ idReport=" + idReport + " ]";
+    }
     
 }

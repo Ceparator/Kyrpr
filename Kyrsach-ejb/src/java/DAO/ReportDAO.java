@@ -5,39 +5,92 @@
  */
 package DAO;
 
+import Model.Myuser;
 import Model.Report;
+import Model.Route;
+import Model.Stop;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 import javax.ejb.Stateful;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
  * @author Ceparator
  */
 @Stateful
-public class ReportDAO {
+public class ReportDAO implements ReportDAOInterface {
 
-    public void deleteReport(List<Report> selectedReportList) {
-        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @PersistenceContext(unitName = "Kyrsach-ejbPU2")
+    private EntityManager em2;
+
+    @PersistenceContext(unitName = "Kyrsach-ejbPU")
+    private EntityManager em;
+
+    @Override
+    public void deleteReport(List<Report> selectedReportList) throws Exception {
+        Iterator<Report> iter = selectedReportList.iterator();
+        try {
+            while (iter.hasNext()) {
+                Report item = iter.next();
+                Report someReport = em2.getReference(Report.class, item.getIdReport());
+                em2.remove(someReport);
+            }
+        } catch (Exception ex) {
+            throw new Exception(ex);
+        }
     }
 
+    @Override
     public List<Report> getAllReports() {
-        ArrayList<Report> reportList = new ArrayList<>();
-        java.util.Date date = new java.util.Date();
-        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-        Report report = new Report(10, 10, 10, sqlDate, 10);
-        reportList.add(report);
-        return reportList;
+        Query query = em2.createQuery("SELECT r FROM Report r", Report.class);
+        return query.getResultList();
     }
 
+    @Override
+    public int getUserRoute(String username) {
+        Myuser myuser = em2.find(Myuser.class, username);
+        int routeNumber = myuser.getRouteNumber();
+        Query query = em.createQuery("SELECT r FROM Route r WHERE r.number = ?1", Report.class);
+        query.setParameter(1, routeNumber);
+        Route route = (Route) query.getSingleResult();
+        return route.getNumber();
+    }
+
+    @Override
     public void addReport(int routeNumber, int tickets, Date newDate) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Query query = em.createQuery("SELECT r FROM Route r WHERE r.number = ?1", Report.class);
+        query.setParameter(1, routeNumber);
+        Route route = (Route) query.getSingleResult();
+        Report report = new Report();
+        report.setRouteNumber(routeNumber);
+        report.setTickets(tickets);
+        report.setVremya(newDate);
+        report.setSumma(route.getPrice() * tickets);
+        em2.persist(report);
+        route.setRating(route.getRating() + report.getSumma() * 0.01);
+        em.merge(route);
     }
 
+    @Override
     public void editReport(int idReport, int routeNumber, int tickets, Date newDate) {
-        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Query query = em.createQuery("SELECT r FROM Route r WHERE r.number = ?1", Report.class);
+        query.setParameter(1, routeNumber);
+        Route route = (Route) query.getSingleResult();
+        Report report = new Report();
+        report.setRouteNumber(routeNumber);
+        report.setTickets(tickets);
+        report.setVremya(newDate);
+        report.setSumma(route.getPrice() * tickets);
+        report.setIdReport(idReport);
+        em2.merge(report);
+        route.setRating(route.getRating() + report.getSumma() * 0.01);
+        em.merge(route);
     }
 
 }

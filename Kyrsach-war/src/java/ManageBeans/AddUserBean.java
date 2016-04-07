@@ -5,8 +5,9 @@
  */
 package ManageBeans;
 
-import DAO.UserDAO;
-import Model.User;
+import DAO.MyuserDAO;
+import DAO.MyuserDAOInterface;
+import Model.Myuser;
 import java.sql.SQLException;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -23,22 +24,49 @@ import javax.faces.context.FacesContext;
 public class AddUserBean {
 
     @EJB
-    private UserDAO userDAO = new UserDAO();
+    private MyuserDAOInterface userDAO;
 
-    private User user;
+    private String username;
+    private String password;
+    private String role;
+    private int routeNumber;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public int getRouteNumber() {
+        return routeNumber;
+    }
+
+    public void setRouteNumber(int routeNumber) {
+        this.routeNumber = routeNumber;
+    }
 
     @PostConstruct
     private void initializeBean() {
-        user = new User();
-        user.setRole("user");
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+        this.role = "guest";
+        this.routeNumber = 0;
     }
 
     public String logout() throws Exception {
@@ -47,7 +75,7 @@ public class AddUserBean {
     }
 
     public String addNewUser() throws SQLException, Exception {
-        userDAO.addUser(user.getUsername(), user.getPassword(), user.getRole(), user.getRouteNumber());
+        userDAO.addUser(username, password, role, routeNumber);
         return "/index.xhtml";
     }
 }

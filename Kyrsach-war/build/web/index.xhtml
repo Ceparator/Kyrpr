@@ -21,6 +21,8 @@
                     <h:commandButton value="Check stops" action="/allStops.xhtml"/>
                     <br/><br/>
                     <h:commandButton value="Show all users" rendered="#{request.isUserInRole('admin')}" action="/allUsers.xhtml"/>
+                    <br/><br/>
+                    <h:commandButton value="Look at the reports" action="/allReports.xhtml"/>
                 </h:form>
             </c:when>
             <c:otherwise>

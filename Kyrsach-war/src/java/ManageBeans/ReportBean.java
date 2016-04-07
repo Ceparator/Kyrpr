@@ -6,14 +6,17 @@
 package ManageBeans;
 
 import DAO.ReportDAO;
+import DAO.ReportDAOInterface;
 import Model.Report;
 import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import org.icefaces.ace.model.table.RowStateMap;
 
 /**
@@ -25,9 +28,10 @@ import org.icefaces.ace.model.table.RowStateMap;
 public class ReportBean implements Serializable {
 
     @EJB
-    private ReportDAO reportDAO;
+    private ReportDAOInterface reportDAO;
 
     private int editId;
+    private int routeNumber;
 
     @PostConstruct
     private void initializeBean() {
@@ -40,6 +44,14 @@ public class ReportBean implements Serializable {
 
     public void setEditId(int editId) {
         this.editId = editId;
+    }
+
+    public int getRouteNumber() {
+        return routeNumber;
+    }
+
+    public void setRouteNumber(int routeNumber) {
+        this.routeNumber = routeNumber;
     }
 
     private RowStateMap stateMap;
@@ -66,4 +78,9 @@ public class ReportBean implements Serializable {
         return "/editReport.xhtml";
     }
     
+    public String toAddReport() throws SQLException, Exception {
+        String somename = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal().getName();
+        routeNumber = reportDAO.getUserRoute(somename);
+        return "/addReport.xhtml";
+    }  
 }

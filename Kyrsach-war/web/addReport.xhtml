@@ -18,7 +18,7 @@
                             <h:outputLabel value="Report's route" for="route"/> 
                         </th> 
                         <th> 
-                            <h:inputText id="route" value="#{addReportBean.report.routeNumber}" required="true"> 
+                            <h:inputText id="route" value="#{reportBean.routeNumber}" readonly="true" required="true"> 
                             </h:inputText> 
                         </th> 
                         <th> 
@@ -58,6 +58,10 @@
                         </th> 
                     </tr> 
                 </table>
+                <br/>
+                <button onclick="location.href = 'http://localhost:8080/Kyrsach-war/'">
+                    Back to main page
+                </button>
             </h:form> 
         </f:view>
     </h:body>

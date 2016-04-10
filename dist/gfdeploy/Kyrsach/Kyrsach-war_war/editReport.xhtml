@@ -23,7 +23,11 @@
                         </th> 
                         <th> 
                             <h:message for="route" style="color:red" /> 
+                            <h:outputLabel value="Report old route number "/>
+                            <h:outputLabel value="#{reportBean.oldRouteNumber}"/>
+                            <br/>
                         </th> 
+
                     </tr> 
                     <tr> 
                         <th align="left"> 
@@ -36,7 +40,11 @@
                         </th> 
                         <th> 
                             <h:message for="tickets" style="color:red" /> 
+                            <h:outputLabel value="Route old tickets "/>
+                            <h:outputLabel value="#{reportBean.oldTickets}"/>
+                            <br/>
                         </th> 
+
                     </tr> 
                     <tr> 
                         <th align="left"> 
@@ -49,7 +57,11 @@
                         </th> 
                         <th> 
                             <h:message for="vremya" style="color:red" /> 
+                            <h:outputLabel value="Report old time "/>
+                            <h:outputLabel value="#{reportBean.oldVremya}"/>
+                            <br/>
                         </th> 
+
                     </tr>  
                     <tr> 
                         <th></th> 

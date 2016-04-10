@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface MyuserDAOInterface {
 
-    void addUser(String username, String password, String role, int routeNumber);
+    void addUser(String username, String password, String role, int routeNumber) throws Exception;
 
     List<Myuser> getAllUsers();
     

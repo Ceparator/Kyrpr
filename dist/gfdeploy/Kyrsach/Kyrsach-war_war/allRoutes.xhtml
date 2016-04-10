@@ -50,9 +50,9 @@
                 <br/><br/>
                 <h:commandButton value="Check stops" action="/allStops.xhtml"/>
                 <br/><br/>
-                <h:commandButton value="Add route"  action="/addRoute.xhtml"/> <!--rendered="#{request.isUserInRole('admin')}" -->
+                <h:commandButton value="Add route" rendered="#{request.isUserInRole('admin')}"  action="/addRoute.xhtml"/> 
                 <br/><br/>
-                <h:commandButton value="Delete route"  actionListener="#{routeBean.actionListener}"/> <!--rendered="#{request.isUserInRole('admin')}" -->
+                <h:commandButton value="Delete route"  rendered="#{request.isUserInRole('admin')}" actionListener="#{routeBean.actionListener}"/> 
             </h:form> 
         </f:view>
     </h:body>

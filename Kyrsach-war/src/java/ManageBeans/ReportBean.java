@@ -13,6 +13,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -32,6 +33,9 @@ public class ReportBean implements Serializable {
 
     private int editId;
     private int routeNumber;
+    private int oldRouteNumber;
+    private int oldTickets;
+    private Date oldVremya;
 
     @PostConstruct
     private void initializeBean() {
@@ -54,6 +58,30 @@ public class ReportBean implements Serializable {
         this.routeNumber = routeNumber;
     }
 
+    public int getOldRouteNumber() {
+        return oldRouteNumber;
+    }
+
+    public void setOldRouteNumber(int oldRouteNumber) {
+        this.oldRouteNumber = oldRouteNumber;
+    }
+
+    public int getOldTickets() {
+        return oldTickets;
+    }
+
+    public void setOldTickets(int oldTickets) {
+        this.oldTickets = oldTickets;
+    }
+
+    public Date getOldVremya() {
+        return oldVremya;
+    }
+
+    public void setOldVremya(Date oldVremya) {
+        this.oldVremya = oldVremya;
+    }
+
     private RowStateMap stateMap;
 
     public RowStateMap getStateMap() {
@@ -73,8 +101,11 @@ public class ReportBean implements Serializable {
         return reportDAO.getAllReports();
     }
 
-    public String editReport(int idReport) {
+    public String toEditReport(int idReport, int oldRouteNumber, int oldTickets, Date oldVremya) {
         this.editId = idReport;
+        this.oldRouteNumber = oldRouteNumber;
+        this.oldTickets = oldTickets;
+        this.oldVremya = oldVremya;
         return "/editReport.xhtml";
     }
     

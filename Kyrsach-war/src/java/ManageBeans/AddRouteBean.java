@@ -41,6 +41,7 @@ public class AddRouteBean implements Serializable {
     private Route route;
     private List<Stop> firstStops;
     private List<Stop> secondStops;
+    boolean autoMirror;
 
     @PostConstruct
     private void initializeBean() {
@@ -83,6 +84,14 @@ public class AddRouteBean implements Serializable {
         this.stateMap = stateMap;
     }
 
+    public boolean isAutoMirror() {
+        return autoMirror;
+    }
+
+    public void setAutoMirror(boolean autoMirror) {
+        this.autoMirror = autoMirror;
+    }
+
     public String addNewRoute() throws SQLException, Exception {
         route.setRating(0);
         int count = 1;
@@ -107,25 +116,55 @@ public class AddRouteBean implements Serializable {
             circuit.setIdStop(iter.next());
             secondCircuit.add(circuit);
             count++;
-        }  
+        }
         circuitDAO.addCircuit(firstCircuit, idRoute);
         circuitDAO.addCircuit(secondCircuit, idRoute);
+        firstStops = null;
+        secondStops = null;
         return "/allRoutes.xhtml";
     }
 
     public void addFirstStops(Stop stop) throws Exception {
         if (!firstStops.contains(stop)) {
             firstStops.add(stop);
+            if (autoMirror) {
+                if (!secondStops.contains(stop)) {
+                    secondStops.add(0, stop);
+                }
+            }
         }
     }
 
     public void addSecondStops(Stop stop) throws Exception {
         if (!secondStops.contains(stop)) {
             secondStops.add(stop);
+            if (autoMirror) {
+                if (!firstStops.contains(stop)) {
+                    firstStops.add(0, stop);
+                }
+            }
         }
     }
 
     public void mirror() {
-        secondStops = Lists.reverse(firstStops);
+        List<Stop> someStopList = new ArrayList<>();
+        someStopList.addAll(firstStops);
+        secondStops = Lists.reverse(someStopList);
+    }
+
+    public void deleteStopFromCircuit(Stop stop, int circuitNumber) {
+        if (autoMirror) {
+            firstStops.remove(stop);
+            secondStops.remove(stop);
+        } else {
+            switch (circuitNumber) {
+                case 1:
+                    firstStops.remove(stop);
+                    break;
+                case 2:
+                    secondStops.remove(stop);
+                    break;
+            }
+        }
     }
 }

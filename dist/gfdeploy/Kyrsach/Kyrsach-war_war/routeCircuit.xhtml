@@ -40,10 +40,10 @@
                                 filterBy="#{rt.idStop.coordY}" filterMatchMode="contains">
                         <h:outputText value="#{rt.idStop.coordY}"/>
                     </ace:column>
-                    <ace:column headerText="" > <!--rendered="#{request.isUserInRole('admin')}"-->
+                    <ace:column rendered="#{request.isUserInRole('admin')}" headerText="" > 
                         <h:commandLink action="#{circuitBean.DeleteCircuit(rt.idCircuit)}" value="Delete route stop"/>
                     </ace:column>
-                    <ace:column headerText=""> <!--rendered="#{request.isUserInRole('admin')}" -->
+                    <ace:column rendered="#{request.isUserInRole('admin')}" headerText=""> 
                         <h:commandLink action="#{circuitBean.ToEditCircuit(rt.idCircuit, rt.stopNumber, rt.idStop, routeBean.getFirstCircuit(routeBean.numberRoute).size())}" value="Edit route stop"/>
                     </ace:column>
                 </ace:dataTable>
@@ -71,10 +71,10 @@
                                 filterBy="#{rtt.idStop.coordY}" filterMatchMode="contains">
                         <h:outputText value="#{rtt.idStop.coordY}"/>
                     </ace:column>
-                    <ace:column headerText="" > <!--rendered="#{request.isUserInRole('admin')}"-->
+                    <ace:column headerText="" rendered="#{request.isUserInRole('admin')}"> 
                         <h:commandLink action="#{circuitBean.DeleteCircuit(rtt.idCircuit)}" value="Delete route stop"/>
                     </ace:column>
-                    <ace:column headerText=""> <!--rendered="#{request.isUserInRole('admin')}" -->
+                    <ace:column headerText="" rendered="#{request.isUserInRole('admin')}"> 
                         <h:commandLink action="#{circuitBean.ToEditCircuit(rtt.idCircuit, rtt.stopNumber, rtt.idStop, routeBean.getFirstCircuit(routeBean.numberRoute).size())}" value="Edit route stop"/>
                     </ace:column>
                 </ace:dataTable>

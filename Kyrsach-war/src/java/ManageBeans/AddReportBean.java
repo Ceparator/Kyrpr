@@ -50,9 +50,9 @@ public class AddReportBean {
         this.stateMap = stateMap;
     }
 
-    public String addNewReport() throws SQLException, Exception {
+    public String addNewReport(int routeNumber) throws SQLException, Exception {
         java.sql.Date newDate = new java.sql.Date(report.getVremya().getTime());
-        reportDAO.addReport(report.getRouteNumber(), report.getTickets(), newDate);
+        reportDAO.addReport(routeNumber, report.getTickets(), newDate);
         return "/allReports.xhtml";
     }
 

@@ -39,32 +39,31 @@
                     </tr>
                     <tr>
                         <th align="left"> 
-                            <h:outputLabel value="User role" for="role"/> <!--rendered="#{request.isUserInRole('admin')}" -->
+                            <h:outputLabel rendered="#{request.isUserInRole('admin')}" value="User role" for="role"/> 
                         </th>
                         <th>
-                            <h:inputText  id="role" value="#{addUserBean.role}" required="true"> <!--rendered="#{request.isUserInRole('admin')}" -->
-                            </h:inputText> 
-                        </th>
-                        <th>
-                            <h:message for="role" style="color:red" /> 
+                            <h:selectOneMenu rendered="#{request.isUserInRole('admin')}" value="#{addUserBean.role}">
+                                <f:selectItem itemValue="guest" itemLabel="guest" />
+                                <f:selectItem itemValue="conductor" itemLabel="conductor" />
+                                <f:selectItem itemValue="admin" itemLabel="admin" />
+                            </h:selectOneMenu>
                         </th>
                     </tr>
                     <tr>
                         <th align="left"> 
-                            <h:outputLabel value="User route" for="route"/> <!--rendered="#{request.isUserInRole('admin')}" -->
+                            <h:outputLabel rendered="#{request.isUserInRole('admin')}" value="User route" for="route"/> 
                         </th>
                         <th>
-                            <h:inputText  id="route" value="#{addUserBean.routeNumber}" required="true"> <!--rendered="#{request.isUserInRole('admin')}" -->
-                            </h:inputText> 
-                        </th>
-                        <th>
-                            <h:message for="route" style="color:red" /> 
+                            <h:selectOneMenu rendered="#{request.isUserInRole('admin')}" value="#{addUserBean.routeNumber}"> 
+                                <f:selectItems value="#{routeBean.getAllRoutes()}" var="route" 
+                                               itemValue="#{route.number}" itemLabel="#{route.number}" /> 
+                            </h:selectOneMenu>
                         </th>
                     </tr>
                     <tr>
                         <th></th>
                         <th align="right"> 
-                            <h:commandButton  value="Register me" action="#{addUserBean.addNewUser()}"/> 
+                            <h:commandButton  value="Register user" action="#{addUserBean.addNewUser()}"/> 
                         </th> 
                     </tr>
                 </table>

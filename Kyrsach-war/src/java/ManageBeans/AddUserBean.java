@@ -66,7 +66,6 @@ public class AddUserBean {
     @PostConstruct
     private void initializeBean() {
         this.role = "guest";
-        this.routeNumber = 0;
     }
 
     public String logout() throws Exception {
@@ -75,6 +74,9 @@ public class AddUserBean {
     }
 
     public String addNewUser() throws SQLException, Exception {
+        if ("quest".equals(role)){
+            routeNumber = 0;
+        }
         userDAO.addUser(username, password, role, routeNumber);
         return "/index.xhtml";
     }

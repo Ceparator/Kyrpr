@@ -7,6 +7,8 @@ package DAO;
 
 import Model.Myuser;
 import Model.MyuserRole;
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -14,6 +16,7 @@ import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 
 /**
  *
@@ -26,9 +29,11 @@ public class MyuserDAO implements MyuserDAOInterface {
     private EntityManager em2;
 
     @Override
-    public void addUser(String username, String password, String role, int routeNumber) {
+    public void addUser(String username, String password, String role, int routeNumber) throws Exception{
         Myuser myuser = new Myuser();
         myuser.setUsername(username);
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        password = (new HexBinaryAdapter()).marshal(md.digest(password.getBytes(Charset.forName("UTF-8"))));
         myuser.setPassword(password);
         myuser.setRouteNumber(routeNumber);
         MyuserRole myuserRole = new MyuserRole();

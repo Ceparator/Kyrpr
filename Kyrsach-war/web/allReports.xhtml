@@ -20,7 +20,7 @@
                                stateMap="#{reportBean.stateMap}"  
                                selectionMode="multiple">
                     <ace:column headerText="Id" sortBy="#{rep.idReport} "
-                                rendered ="true" filterBy="#{rep.idReport}" filterMatchMode="contains">
+                                rendered ="false" filterBy="#{rep.idReport}" filterMatchMode="contains">
                         <h:outputText value="#{rep.idReport}"/>
                     </ace:column>
                     <ace:column headerText="Route" sortBy="#{rep.routeNumber}"
@@ -40,13 +40,13 @@
                         <h:outputText value="#{rep.summa}"/>
                     </ace:column>
                     <ace:column headerText="" rendered="#{request.isUserInRole('conductor')}" >
-                        <h:commandLink action="#{reportBean.editReport(rep.idReport)}" value="Edit report"/>
+                        <h:commandLink action="#{reportBean.toEditReport(rep.idReport, rep.routeNumber, rep.tickets, rep.vremya)}" value="Edit report"/>
                     </ace:column>
                 </ace:dataTable>
                 <br/><br/>
                 <h:commandButton value="Look at the routes" action="/allRoutes.xhtml"/>
                 <br/><br/>
-                <h:commandButton value="Delete reports" actionListener="#{reportBean.actionListener}"/>  <!--rendered="#{request.isUserInRole('admin')}" -->
+                <h:commandButton value="Delete reports" rendered="#{request.isUserInRole('admin')}" actionListener="#{reportBean.actionListener}"/>  
                 <br/><br/>
                 <h:commandButton value="Add report" rendered="#{request.isUserInRole('conductor')}" action="#{reportBean.toAddReport()}" />
             </h:form> 

@@ -28,7 +28,11 @@
                         <f:validateLongRange maximum="1000" minimum="1"/>
                     </h:inputText> 
                     <h:message for="price" style="color:red" />    
-                </p> 
+                </p>
+                <p align="center">
+                    <h:selectBooleanCheckbox id="autoMirror" value="#{addRouteBean.autoMirror}" />
+                    <h:outputLabel value="Enable auto mirror" for="autoMirror" />
+                </p>
                 <table align="center"> 
                     <tr>
                         <td>
@@ -49,6 +53,9 @@
                                 <ace:column headerText="Coordinate Y"
                                             rendered ="false" filterBy="#{st.coordY}" filterMatchMode="contains">
                                     <h:outputText value="#{st.coordY}"/>
+                                </ace:column>
+                                <ace:column headerText=""> 
+                                    <h:commandLink action="#{addRouteBean.deleteStopFromCircuit(st, 1)}" value="Delete stop from scheme"/>
                                 </ace:column>
                             </ace:dataTable>
                         </td>
@@ -72,6 +79,9 @@
                                 <ace:column headerText="Coordinate Y"
                                             rendered ="false" filterBy="#{st.coordY}" filterMatchMode="contains">
                                     <h:outputText value="#{st.coordY}"/>
+                                </ace:column>
+                                <ace:column headerText=""> 
+                                    <h:commandLink action="#{addRouteBean.deleteStopFromCircuit(st, 2)}" value="Delete stop from scheme"/>
                                 </ace:column>
                             </ace:dataTable>
                         </td>

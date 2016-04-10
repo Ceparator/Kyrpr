@@ -22,7 +22,7 @@
                     <br/><br/>
                     <h:commandButton value="Show all users" rendered="#{request.isUserInRole('admin')}" action="/allUsers.xhtml"/>
                     <br/><br/>
-                    <h:commandButton value="Look at the reports" action="/allReports.xhtml"/>
+                    <h:commandButton value="Look at the reports" rendered="#{request.isUserInRole('admin') or request.isUserInRole('conductor')}" action="/allReports.xhtml"/>
                 </h:form>
             </c:when>
             <c:otherwise>
@@ -37,18 +37,6 @@
                         <h:commandButton value="Login" action="/login.xhtml"/>
                         <br/><br/>
                         <h:commandButton value="Register" action="/addUser.xhtml"/>
-                        <br/><br/>
-                        <h:commandButton value="Look at the reports" action="/allReports.xhtml"/>
-
-
-                        <br/><br/><br/><br/><br/><br/>
-                        <h:commandButton  value="Logout" action="#{addUserBean.logout()}" />
-                        <br/><br/>
-                        <h:commandButton value="Look at the routes" action="/allRoutes.xhtml"/>
-                        <br/><br/>
-                        <h:commandButton value="Check stops" action="/allStops.xhtml"/>
-                        <br/><br/>
-                        <h:commandButton value="Show all users" action="/allUsers.xhtml"/> <!--rendered="#{request.isUserInRole('admin')}" -->
                     </h:form> 
                 </f:view>
             </c:otherwise>

@@ -36,7 +36,9 @@ public class ReportDAO implements ReportDAOInterface {
             while (iter.hasNext()) {
                 Report item = iter.next();
                 Report someReport = em2.getReference(Report.class, item.getIdReport());
-                Route route  = em.getReference(Route.class, someReport.getIdReport());
+                Query query = em.createQuery("SELECT r FROM Route r WHERE r.number = ?1", Report.class);
+                query.setParameter(1, someReport.getRouteNumber());
+                Route route = (Route) query.getSingleResult();
                 route.setRating(route.getRating() - someReport.getSumma() * 0.01);
                 em.merge(route);
                 em2.remove(someReport);
@@ -91,7 +93,7 @@ public class ReportDAO implements ReportDAOInterface {
         report.setSumma(route.getPrice() * tickets);
         report.setIdReport(idReport);
         em2.merge(report);
-        route.setRating(route.getRating() - oldSum*0.01 + report.getSumma() * 0.01);
+        route.setRating(route.getRating() - oldSum * 0.01 + report.getSumma() * 0.01);
         em.merge(route);
     }
 

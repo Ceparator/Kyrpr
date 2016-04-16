@@ -5,12 +5,12 @@
  */
 package DAO;
 
-import javax.ejb.Stateful;
 import Model.Circuit;
 import Model.Route;
 import Model.Stop;
 import java.util.Iterator;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -19,7 +19,7 @@ import javax.persistence.Query;
  *
  * @author Ceparator
  */
-@Stateful
+@Stateless
 public class CircuitDAO implements CircuitDAOInterface {
 
     @PersistenceContext(unitName = "Kyrsach-ejbPU")

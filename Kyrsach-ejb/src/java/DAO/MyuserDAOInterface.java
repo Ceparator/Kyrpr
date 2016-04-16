@@ -7,11 +7,13 @@ package DAO;
 
 import Model.Myuser;
 import java.util.List;
+import javax.ejb.Local;
 
 /**
  *
  * @author Ceparator
  */
+@Local
 public interface MyuserDAOInterface {
 
     void addUser(String username, String password, String role, int routeNumber) throws Exception;

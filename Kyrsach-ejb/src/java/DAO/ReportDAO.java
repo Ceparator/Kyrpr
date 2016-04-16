@@ -8,13 +8,10 @@ package DAO;
 import Model.Myuser;
 import Model.Report;
 import Model.Route;
-import Model.Stop;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -23,7 +20,7 @@ import javax.persistence.Query;
  *
  * @author Ceparator
  */
-@Stateful
+@Stateless
 public class ReportDAO implements ReportDAOInterface {
 
     @PersistenceContext(unitName = "Kyrsach-ejbPU2")
@@ -39,6 +36,9 @@ public class ReportDAO implements ReportDAOInterface {
             while (iter.hasNext()) {
                 Report item = iter.next();
                 Report someReport = em2.getReference(Report.class, item.getIdReport());
+                Route route  = em.getReference(Route.class, someReport.getIdReport());
+                route.setRating(route.getRating() - someReport.getSumma() * 0.01);
+                em.merge(route);
                 em2.remove(someReport);
             }
         } catch (Exception ex) {
@@ -66,7 +66,6 @@ public class ReportDAO implements ReportDAOInterface {
     public void addReport(int routeNumber, int tickets, Date newDate) {
         Query query = em.createQuery("SELECT r FROM Route r WHERE r.number = ?1", Report.class);
         query.setParameter(1, routeNumber);
-        System.out.println(routeNumber+ "---------------------------------");
         Route route = (Route) query.getSingleResult();
         Report report = new Report();
         report.setRouteNumber(routeNumber);
@@ -83,8 +82,6 @@ public class ReportDAO implements ReportDAOInterface {
         Query query = em.createQuery("SELECT r FROM Route r WHERE r.number = ?1", Report.class);
         query.setParameter(1, routeNumber);
         Report oldReport = em2.find(Report.class, idReport);
-        System.out.println("-------------------" + idReport);
-        System.out.println(oldReport.getSumma());
         int oldSum = oldReport.getSumma();
         Route route = (Route) query.getSingleResult();
         Report report = new Report();

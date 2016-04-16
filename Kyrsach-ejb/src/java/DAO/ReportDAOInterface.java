@@ -8,11 +8,13 @@ package DAO;
 import Model.Report;
 import java.sql.Date;
 import java.util.List;
+import javax.ejb.Local;
 
 /**
  *
  * @author Ceparator
  */
+@Local
 public interface ReportDAOInterface {
 
     void addReport(int routeNumber, int tickets, Date newDate);

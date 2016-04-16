@@ -12,7 +12,7 @@ import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
  *
  * @author Ceparator
  */
-@Stateful
+@Stateless
 public class MyuserDAO implements MyuserDAOInterface {
 
     @PersistenceContext(unitName = "Kyrsach-ejbPU2")

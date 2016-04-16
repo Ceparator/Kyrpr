@@ -7,7 +7,6 @@ package DAO;
 
 import Model.Circuit;
 import Model.Route;
-import Model.Stop;
 import java.util.List;
 import javax.ejb.Local;
 

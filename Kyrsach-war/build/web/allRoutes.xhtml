@@ -48,6 +48,9 @@
                     </ace:column>
                 </ace:dataTable>
                 <br/><br/>
+                <br/><br/>
+                <h:commandButton value="Back to main page" action="/index.xhtml"/> 
+                <br/><br/>
                 <h:commandButton value="Check stops" action="/allStops.xhtml"/>
                 <br/><br/>
                 <h:commandButton value="Add route" rendered="#{request.isUserInRole('admin')}"  action="/addRoute.xhtml"/> 

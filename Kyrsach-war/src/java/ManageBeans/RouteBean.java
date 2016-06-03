@@ -32,7 +32,7 @@ public class RouteBean implements Serializable {
     private RouteDAOInterface routeDAO;
 
     private int numberRoute;
-    
+
     @PostConstruct
     private void initializeBean() {
         numberRoute = 0;
@@ -80,6 +80,11 @@ public class RouteBean implements Serializable {
     public String redirectRouteInfo(int number) {
         this.numberRoute = number;
         return "/routeCircuit.xhtml";
+    }
+
+    public String test(int number) {
+        this.numberRoute = number;
+        return "/testPage.xhtml";
     }
 
 }

@@ -12,6 +12,8 @@ import java.sql.Date;
 import java.util.Iterator;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -30,6 +32,7 @@ public class ReportDAO implements ReportDAOInterface {
     private EntityManager em;
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void deleteReport(List<Report> selectedReportList) throws Exception {
         Iterator<Report> iter = selectedReportList.iterator();
         try {
@@ -65,6 +68,7 @@ public class ReportDAO implements ReportDAOInterface {
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void addReport(int routeNumber, int tickets, Date newDate) {
         Query query = em.createQuery("SELECT r FROM Route r WHERE r.number = ?1", Report.class);
         query.setParameter(1, routeNumber);
@@ -80,6 +84,7 @@ public class ReportDAO implements ReportDAOInterface {
     }
 
     @Override
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void editReport(int idReport, int routeNumber, int tickets, Date newDate) {
         Query query = em.createQuery("SELECT r FROM Route r WHERE r.number = ?1", Report.class);
         query.setParameter(1, routeNumber);

@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scene Scope="Project" version="2">
     <Scope Scope="Faces Configuration Only"/>
-    <Scope Scope="Project"/>
+    <Scope Scope="Project">
+        <Node id="404.xhtml" x="400" y="300" zoom="true"/>
+        <Node id="addStop.xhtml" x="1150" y="150" zoom="true"/>
+        <Node id="index.xhtml" x="400" y="600" zoom="true"/>
+        <Node id="loginerror.xhtml" x="650" y="600" zoom="true"/>
+        <Node id="editStop.xhtml" x="400" y="450" zoom="true"/>
+        <Node id="allReports.xhtml" x="1400" y="150" zoom="true"/>
+        <Node id="addUser.xhtml" x="900" y="150" zoom="true"/>
+        <Node id="403.xhtml" x="150" y="750" zoom="true"/>
+        <Node id="testPage.xhtml" x="150" y="600" zoom="true"/>
+        <Node id="allRoutes.xhtml" x="400" y="150" zoom="true"/>
+        <Node id="addReport.xhtml" x="400" y="750" zoom="true"/>
+        <Node id="routeCircuit.xhtml" x="900" y="450" zoom="true"/>
+        <Node id="allUsers.xhtml" x="150" y="450" zoom="true"/>
+        <Node id="login.xhtml" x="650" y="300" zoom="true"/>
+        <Node id="allStops.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="editCircuit.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="index.html" x="650" y="150" zoom="true"/>
+        <Node id="addRoute.xhtml" x="900" y="300" zoom="true"/>
+        <Node id="editReport.xhtml" x="1150" y="300" zoom="true"/>
+        <Node id="addCircuit.xhtml" x="650" y="450" zoom="true"/>
+    </Scope>
     <Scope Scope="All Faces Configurations"/>
 </Scene>

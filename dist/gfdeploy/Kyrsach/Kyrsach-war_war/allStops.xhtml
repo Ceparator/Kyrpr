@@ -44,7 +44,7 @@
                 <br/><br/>
                 <h:commandButton value="Delete stops" rendered="#{request.isUserInRole('admin')}" actionListener="#{stopBean.actionListener}"/> 
                 <br/><br/>
-                <h:commandButton value="Add stop"  action="/addStop.xhtml"/>
+                <h:commandButton value="Add stop" rendered="#{request.isUserInRole('admin')}" action="/addStop.xhtml"/>
             </h:form> 
         </f:view> 
     </h:body>
